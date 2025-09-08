@@ -4,24 +4,24 @@ on:
   workflow_dispatch:
 
 jobs:
-  docker-rust:
+  build:
     runs-on: ubuntu-latest
-    steps:
-    - name: Setup Docker build
-      uses: docker/setup-buildx-action@v3
-    - name: Build and push
-      id: docker_build
-      uses: docker/build-push-action@v6
-      with:
-        file: "Dockerfile.rust"
+    strategy:
+      matrix:
+        variant: [rust, sac]
 
-  docker-sac:
+jobs:
+  build:
     runs-on: ubuntu-latest
     steps:
-    - name: Setup Docker build
-      uses: docker/setup-buildx-action@v3
-    - name: Build and push
-      id: docker_build
-      uses: docker/build-push-action@v6
+    - uses: actions/checkout@v5
+    - uses: docker/setup-buildx-action@v3
+    - name: docker/login-action@v3
       with:
-        file: "Dockerfile.sac"
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - uses: docker/build-push-action@v6
+      with:
+        file: Dockerfile.${{ matrix.variant }}
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/ecodynamic:${{ matrix.variant }}
+        push: true
