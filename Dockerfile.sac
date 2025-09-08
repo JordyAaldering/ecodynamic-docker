@@ -6,8 +6,8 @@ RUN git clone --single-branch --recursive https://github.com/SacBase/sac-energy.
  && make
 
 # Install dynamic adaptation controller
-RUN curl https://github.com/JordyAaldering/ecodynamic/releases/download/main/server > /usr/local/bin/ecodynamic \
- && chmod +x /usr/local/bin/ecodynamic
+ADD https://github.com/JordyAaldering/ecodynamic/releases/download/main/server /usr/local/bin/ecodynamic
+RUN chmod +x /usr/local/bin/ecodynamic
 
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]

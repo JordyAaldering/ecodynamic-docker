@@ -1,10 +1,8 @@
-FROM rust:latest
+FROM debian:trixie-slim
 
 # Install dynamic adaptation controller
 ADD https://github.com/JordyAaldering/ecodynamic/releases/download/main/server /usr/local/bin/ecodynamic
 RUN chmod +x /usr/local/bin/ecodynamic
 
-COPY entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
-
-WORKDIR /home
+# Start server
+ENTRYPOINT ["ecodynamic"]

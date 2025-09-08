@@ -7,4 +7,5 @@ else
  ecodynamic "$@" &
 fi
 
+# Start a bash session
 exec bash
