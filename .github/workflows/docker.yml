@@ -19,5 +19,5 @@ jobs:
     - uses: docker/build-push-action@v6
       with:
         file: Dockerfile.${{ matrix.variant }}
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/ecodynamic:${{ matrix.variant }}
+        tags: jordyaa/ecodynamic:${{ matrix.variant }}
         push: true
