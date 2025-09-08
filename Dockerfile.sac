@@ -1,0 +1,15 @@
+FROM sacbase/sac-compiler:latest
+
+# Install SaC energy measuring library
+RUN git clone --single-branch --recursive https://github.com/SacBase/sac-energy.git \
+ && cd sac-energy \
+ && make
+
+# Install dynamic adaptation controller
+RUN curl https://github.com/JordyAaldering/ecodynamic/releases/download/main/server > /usr/local/bin/ecodynamic \
+ && chmod +x /usr/local/bin/ecodynamic
+
+COPY entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+
+WORKDIR /home/ubuntu

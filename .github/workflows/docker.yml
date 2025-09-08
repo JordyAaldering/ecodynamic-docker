@@ -1,0 +1,27 @@
+name: docker
+
+on:
+  workflow_dispatch:
+
+jobs:
+  docker-rust:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup Docker build
+      uses: docker/setup-buildx-action@v3
+    - name: Build and push
+      id: docker_build
+      uses: docker/build-push-action@v6
+      with:
+        file: "Dockerfile.rust"
+
+  docker-sac:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup Docker build
+      uses: docker/setup-buildx-action@v3
+    - name: Build and push
+      id: docker_build
+      uses: docker/build-push-action@v6
+      with:
+        file: "Dockerfile.sac"
