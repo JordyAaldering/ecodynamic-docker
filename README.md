@@ -7,13 +7,13 @@ This repository contains Dockerfiles for running programs with the [`ecodynamic`
 ## Standalone
 
 ```bash
-docker run -d --rm \
+docker run -d --rm --privileged
  -v /tmp:/tmp \
- --user $(id -u):$(id -g) \
- ecodynamic:standalone <server-config>
+ -v /sys/class/powercap:/sys/class/powercap \
+ ecodynamic:standalone <config>
 ```
 
 - `-d`: Run the container detached, alternatively use `-it` to keep the container open in your terminal to see its output.
 - `--rm`: Remove the container when the server is stopped.
-- `-v /tmp:/tmp`: Mount the directory used for the Unix Domain Socket file, used for communication to the server.
-- `--user $(id -u):$(id -g)`: Ensure that the generated Socket file has the same permissions as the current user, allowing for read and write access.
+- `--privileged`: Reading and writing RAPL requires elevated privileges.
+- `-v`: Mount the directory for the Unix Domain Socket, and the RAPL directories.
