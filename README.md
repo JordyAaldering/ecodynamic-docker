@@ -7,7 +7,7 @@ This repository contains Dockerfiles for running programs with the [`ecodynamic`
 ## Standalone
 
 ```bash
-docker run -d --rm --privileged
+docker run -d --rm --privileged \
  -v /tmp:/tmp \
  -v /sys/class/powercap:/sys/class/powercap \
  ecodynamic:standalone <config>
