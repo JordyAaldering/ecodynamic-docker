@@ -1,7 +1,7 @@
 FROM sacbase/sac-compiler:latest
 
 # Install SaC energy measuring library
-RUN git clone --single-branch --recursive https://github.com/SacBase/sac-energy.git \
+RUN git clone --depth 1 --single-branch --recursive https://github.com/SacBase/sac-energy.git \
  && cd sac-energy \
  && make
 
