@@ -13,7 +13,22 @@ docker run -d --rm --privileged \
  ecodynamic:standalone <config>
 ```
 
-- `-d`: Run the container detached, alternatively use `-it` to keep the container open in your terminal to see its output.
+- `-d`: Run the container detached, alternatively use `-it` to keep the container open in your terminal and see its output.
 - `--rm`: Remove the container when the server is stopped.
 - `--privileged`: Reading and writing RAPL requires elevated privileges.
 - `-v`: Mount the directory for the Unix Domain Socket, and the RAPL directories.
+
+## Interactive
+
+The other images are intended to be used interactively.
+
+```bash
+docker run -it --rm --privileged \
+ -v /tmp:/tmp \
+ -v /sys/class/powercap:/sys/class/powercap \
+ --mount type=bind,source=${PWD},target=/home/ \
+ ecodynamic:sac <config?>
+```
+
+- `-it`: Run the container interactively.
+- `--mount`: Mount the current directory to the container's home directory.

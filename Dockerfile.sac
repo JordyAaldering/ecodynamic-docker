@@ -12,4 +12,4 @@ RUN chmod +x /usr/local/bin/ecodynamic
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
-WORKDIR /home/ubuntu
+WORKDIR /home
