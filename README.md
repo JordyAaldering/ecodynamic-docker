@@ -26,7 +26,7 @@ The other images are intended to be used interactively.
 docker run -it --rm --privileged \
  -v /tmp:/tmp \
  -v /sys/class/powercap:/sys/class/powercap \
- --mount type=bind,source=${PWD},target=/home/ \
+ --mount type=bind,source=${PWD},target=/home \
  ecodynamic:sac <config?>
 ```
 
